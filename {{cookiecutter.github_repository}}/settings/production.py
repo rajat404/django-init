@@ -110,17 +110,6 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
     MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 
-# Static Assests
-# ------------------------
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-
-# Compress static files offline
-# http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-COMPRESS_OFFLINE = True
-{%- endif %}
-
 # EMAIL
 # ------------------------------------------------------------------------------
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',

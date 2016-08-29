@@ -16,6 +16,7 @@ yes 'y' | cookiecutter . --no-input
 
 # Run the tests present inside generate project
 cd hello-world-web;
+fab buildprod
 ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 source venv/bin/activate
 fab test:"--cov"

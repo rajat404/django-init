@@ -25,6 +25,7 @@ HERE = dirname(__file__)
 env.project_name = '{{ cookiecutter.main_module }}'
 env.apps_dir = join(HERE, env.project_name)
 env.docs_dir = join(HERE, 'docs')
+env.static_dir = join(env.apps_dir, 'static')
 env.virtualenv_dir = join(HERE, 'venv')
 env.requirements_file = join(HERE, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
@@ -38,6 +39,10 @@ def init(vagrant=False):
     """Prepare a local machine for development."""
 
     install_requirements()
+    {%- if cookiecutter.add_webpack.lower() == 'y' %}
+    install_webpack_dependencies()
+    build()
+    {%- endif %}
     local('createdb %(project_name)s' % env)  # create postgres database
     manage('migrate')
 
@@ -100,7 +105,28 @@ def createapp(appname):
     path = join(env.apps_dir, appname)
     local('mkdir %s' % path)
     manage('startapp %s %s' % (appname, path))
-{%- if cookiecutter.add_ansible.lower() == 'y' %}
+{%- if cookiecutter.add_webpack.lower() == 'y' %}
+
+
+def install_webpack_dependencies():
+    local('npm install')
+
+
+def build(config='webpack.dev.config.js', options='--progress --colors'):
+    """Generate bundles by invoking webpack with provided config
+    """
+    local('./node_modules/.bin/webpack --config %s %s' % (join(env.static_dir, config), options))
+
+
+def buildprod():
+    """Generate production bundles by invoking webpack one time with production config
+    """
+    build(config='webpack.prod.config.js')
+
+
+def watch():
+    local('node %s' % join(env.static_dir, 'server.js'))
+{%- endif %}
 
 
 #  Enviroments & Deployments
@@ -156,7 +182,7 @@ def configure(tags='', skip_tags='deploy'):
 
 
 def deploy():
-    configure(tags='deploy', skip_tags=''){% endif %}
+    configure(tags='deploy', skip_tags='')
 
 
 # Helpers

@@ -1,0 +1,11 @@
+{%raw%}---
+- name: Create webpack stats file
+  command: touch webpack-stats.json
+  become: false
+  tags: ['deploy']
+
+- name: Run build webpack
+  command: {{ webpack_path }} --config {{ webpack_config }} --progress --colors
+  become: false
+  tags: ['deploy']
+{%endraw%}

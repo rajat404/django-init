@@ -5,10 +5,15 @@ yes "yes" | python manage.py migrate
 
 # Run production checks
 python manage.py check --deploy
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+{%- if cookiecutter.add_webpack.lower() == 'y' %}
 
-# Offline compression of staticfiles via django-compressor
-python manage.py compress
+# build node packages
+npm install
+./node_modules/.bin/webpack --config {{ cookiecutter.main_module }}/static/webpack.prod.config.js
+touch webpack-stats.json
 {%- endif %}
+
+# Run Collectstatic
+python manage.py collectstatic --noinput
 
 # used by heroku after slug compilation
