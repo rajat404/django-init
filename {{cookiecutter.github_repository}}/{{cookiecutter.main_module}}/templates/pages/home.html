@@ -1,6 +1,6 @@
 {% raw %}{% extends 'pages/base.html' %}
 {% load staticfiles i18n %}{% endraw %}
-{%- if cookiecutter.add_webpack.lower() == 'y' %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
 {%- raw %}{% load webpack_static from webpack_loader %}
 {% load render_bundle from webpack_loader %}{%- endraw %}
 {%- endif %}
@@ -8,6 +8,6 @@
 {% block body_classes %}{{ block.super}} page-home {% endblock body_classes %}
 {% block content %}
     <div id="app">
-        {% trans 'Homepage comming soon!!' %}
+        {% trans 'Homepage coming soon!!' %}
     </div>
 {% endblock content %}{% endraw %}

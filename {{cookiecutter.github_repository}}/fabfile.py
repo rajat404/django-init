@@ -29,6 +29,9 @@ env.static_dir = join(env.apps_dir, 'static')
 env.virtualenv_dir = join(HERE, 'venv')
 env.requirements_file = join(HERE, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
+{%- if cookiecutter.webpack.lower() == 'y' %}
+env.webpack_config = 'webpack.dev.config.js'
+{%- endif %}
 
 {% if cookiecutter.add_ansible.lower() == 'y' -%}env.use_ssh_config = True
 env.dotenv_path = join(HERE, '.env')
@@ -39,7 +42,7 @@ def init(vagrant=False):
     """Prepare a local machine for development."""
 
     install_requirements()
-    {%- if cookiecutter.add_webpack.lower() == 'y' %}
+    {%- if cookiecutter.webpack.lower() == 'y' %}
     install_webpack_dependencies()
     build()
     {%- endif %}
@@ -105,23 +108,17 @@ def createapp(appname):
     path = join(env.apps_dir, appname)
     local('mkdir %s' % path)
     manage('startapp %s %s' % (appname, path))
-{%- if cookiecutter.add_webpack.lower() == 'y' %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
 
 
 def install_webpack_dependencies():
     local('npm install')
 
 
-def build(config='webpack.dev.config.js', options='--progress --colors'):
+def build(options='--progress --colors'):
     """Generate bundles by invoking webpack with provided config
     """
-    local('./node_modules/.bin/webpack --config %s %s' % (join(env.static_dir, config), options))
-
-
-def buildprod():
-    """Generate production bundles by invoking webpack one time with production config
-    """
-    build(config='webpack.prod.config.js')
+    local('./node_modules/.bin/webpack --config %s %s' % (join(env.static_dir, env.webpack_config), options))
 
 
 def watch():
@@ -138,6 +135,9 @@ def prod():
     env.hosts = ['prod.{{ cookiecutter.main_module }}.com']
     env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_repository }}/.env'
     env.config_setter = fab.run
+    {%- if cookiecutter.webpack.lower() == 'y' %}
+    env.webpack_config = 'webpack.prod.config.js'
+    {%- endif %}
 
 
 def config(action=None, key=None, value=None):

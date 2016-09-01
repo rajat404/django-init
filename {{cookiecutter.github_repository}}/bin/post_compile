@@ -5,7 +5,7 @@ yes "yes" | python manage.py migrate
 
 # Run production checks
 python manage.py check --deploy
-{%- if cookiecutter.add_webpack.lower() == 'y' %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
 
 # build node packages
 npm install
@@ -13,7 +13,7 @@ npm install
 touch webpack-stats.json
 {%- endif %}
 
-# Run Collectstatic
-python manage.py collectstatic --noinput
+# Run collectstatic with new build files and with clear to avoid webpack config files
+python manage.py collectstatic --noinput --clear -i js -i css -i server.js -i webpack.base.config.js -i webpack.dev.config.js -i webpack.prod.config.js
 
 # used by heroku after slug compilation

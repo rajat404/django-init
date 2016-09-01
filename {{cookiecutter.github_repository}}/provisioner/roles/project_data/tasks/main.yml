@@ -32,7 +32,7 @@
 - name: Install packages based on package.json.
   npm: path={{ project_path }} global=no
   become: true
-  when: webpack
+  when: webpack_enabled
   tags: ['deploy']
 
 - name: copy env configuration
@@ -44,9 +44,11 @@
   django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
+  when: not webpack_enabled
 
+# Runs collectstatic with ignored webpack files
 - include: webpack.yml
-  when: webpack
+  when: webpack_enabled
 
 - name: Run database migrations
   django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}

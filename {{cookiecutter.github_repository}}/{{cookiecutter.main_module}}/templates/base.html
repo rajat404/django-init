@@ -1,5 +1,5 @@
 {% raw %}{% load staticfiles i18n %}{% endraw %}
-{%- if cookiecutter.add_webpack.lower() == 'y' %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
 {%- raw %}{% load webpack_static from webpack_loader %}
 {% load render_bundle from webpack_loader %}{%- endraw %}
 {%- endif %}
@@ -23,7 +23,7 @@
     {%- endif %}{% raw %}
 
     {% block css %}{% endraw %}
-      {%- if cookiecutter.add_webpack.lower() != 'y' %}
+      {%- if cookiecutter.webpack.lower() != 'y' %}
       {% raw %}<link href="{% static 'css/normalize.css' %}" rel="stylesheet">
       <link href="{% static 'css/main.css' %}" rel="stylesheet">{% endraw %}
       {%- endif %}{% raw %}
@@ -56,7 +56,7 @@
       <!-- Your stuff: Third-party javascript libraries go here -->
 
       <!-- place project specific Javascript in this file -->{% endraw %}
-      {%- if cookiecutter.add_webpack.lower() == 'y' %}
+      {%- if cookiecutter.webpack.lower() == 'y' %}
         {% raw %}{% render_bundle 'main' 'js' %}{% endraw %}
       {%- else %}
         {% raw %}<script src="{% static 'js/main.js' %}"></script>{% endraw %}

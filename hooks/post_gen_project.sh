@@ -29,7 +29,7 @@ if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner Vagrantfile
 fi
 
-if echo "{{ cookiecutter.add_webpack }}" | grep -iq "^n"; then
+if echo "{{ cookiecutter.webpack }}" | grep -iq "^n"; then
     rm -f package.json
     rm -f {{cookiecutter.main_module}}/static/server.js
     rm -f {{cookiecutter.main_module}}/static/webpack.base.config.js
