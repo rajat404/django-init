@@ -407,7 +407,7 @@ SITE_INFO = {
 WEBPACK_LOADER = {
    'DEFAULT': {
        'CACHE': not DEBUG,
-       'BUNDLE_DIR_NAME': '{{ cookiecutter.main_module }}/static/dist/assets/',  # must end with slash
+       'BUNDLE_DIR_NAME': 'dist/assets/',  # It will add static path before and it must end with slash
        'STATS_FILE': str(ROOT_DIR.path('webpack-stats.json')),
        'POLL_INTERVAL': 0.1,
        'TIMEOUT': None,

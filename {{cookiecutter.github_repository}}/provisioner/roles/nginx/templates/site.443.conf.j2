@@ -35,4 +35,8 @@ server {
         uwsgi_param UWSGI_SCHEME $http_x_forwarded_proto;
     }
 
+    location /static/ {
+        alias {{ project_path }}/.staticfiles/;
+    }
+
 }{%endraw%}
