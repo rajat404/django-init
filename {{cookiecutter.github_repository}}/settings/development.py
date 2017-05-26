@@ -37,6 +37,10 @@ INSTALLED_APPS = ('whitenoise.runserver_nostatic', ) + INSTALLED_APPS
 # Note: This key only used for development and testing.
 SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!')
 
+# cors
+# --------------------------------------------------------------------------
+CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=['localhost', 'localhost:8000'])
+
 # Mail settings
 # ------------------------------------------------------------------------------
 EMAIL_HOST = 'localhost'
