@@ -31,7 +31,7 @@
       - (optional) `null = False`, `blank = True`
       - (required) `null = False`, `blank = False`
 
-    **Boolean fields**:  
+    **Boolean fields**:
       - (two values, T/F) `null = False`, `blank = True`
       - (three values, T/F/Null) `null = True`, `blank = True`
 

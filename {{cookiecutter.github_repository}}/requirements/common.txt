@@ -62,3 +62,9 @@ raven==6.1.0
 # -------------------------------------
 celery[redis]==4.0.2
 {%- endif %}
+
+# Others
+# -------------------------------------
+django-waffle==0.11.1
+django-import-export==0.5.1
+django-autoslug==1.9.3

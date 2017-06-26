@@ -21,7 +21,7 @@ env = environ.Env()
 # ==========================================================================
 # List of strings representing installed apps.
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = (
+DJANGO_INIT_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,6 +49,19 @@ INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
 {%- endif %}
 )
+
+THIRD_PARTY_APPS = (
+    'autoslug',
+    'import_export',
+    'simple_history',  # Middleware also added for the same
+    # 'waffle',
+)
+
+CUSTOM_APPS = (
+
+)
+
+INSTALLED_APPS = DJANGO_INIT_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
 
 # INSTALLED APPS CONFIGURATION
 # ==========================================================================
@@ -140,6 +153,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 # DJANGO CORE

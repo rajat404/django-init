@@ -25,3 +25,7 @@ flake8==3.4.1
 # Versioning
 # -------------------------------------
 bumpversion==0.5.3
+
+# Auto-generating Code
+# -------------------------------------
+django-admin-generator==2.0.0
