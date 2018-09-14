@@ -28,10 +28,10 @@ Project template for django based projects, optimized for making REST API with d
 Install cookiecutter with `brew install cookiecutter` or `pip install cookiecutter`.
 
 ```
-cookiecutter gh:Fueled/django-init
+cookiecutter gh:rajat404/django-init
 ```
 
-It will ask you couple of questions required to generate the project. It will generate a folder containing all the files in your current working directory. 
+It will ask you couple of questions required to generate the project. It will generate a folder containing all the files in your current working directory.
 
 If you opt to setup the project automatically, it will also:
 - initialize a git repo and bump initial tag and version.
@@ -71,7 +71,7 @@ Everyone interacting in the django-init project's codebases, issue trackers, cha
 
 Built with ♥ at [Fueled](https://fueled.com)
 
-[wiki]: https://github.com/Fueled/django-init/wiki
+[wiki]: https://github.com/rajat404/django-init/wiki
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
 [pytest]: http://pytest.org/

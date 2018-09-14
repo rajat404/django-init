@@ -1,5 +1,5 @@
 # Third Party Stuff
-import rest_framework.response
+from rest_framework.response import Response
 from django import http
 
 
@@ -310,3 +310,4 @@ class NotImplemented(Response):
     ability to fulfill the request.
     """
     status_code = 501
+

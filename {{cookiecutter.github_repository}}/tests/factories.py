@@ -23,3 +23,11 @@ def create_user(**kwargs):
     user.set_password(kwargs.get('password', 'test'))
     user.save()
     return user
+
+
+def create_instance(app_name, model_name, **kwargs):
+    """Create an instance of the specified model,
+    along with their dependencies.
+    """
+    model_cls = apps.get_model(app_name, model_name)
+    return G(model_cls, **kwargs)

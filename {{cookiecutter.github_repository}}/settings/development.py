@@ -22,6 +22,12 @@ INTERNAL_IPS = ('127.0.0.1', '192.168.33.12', )
 ALLOWED_HOSTS = ['*']
 
 {%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
+
+# Auto-generate Admin files
+# ------------------------------------------------------------------------------
+# https://github.com/WoLpH/django-admin-generator
+INSTALLED_APPS += ('django_admin_generator', )
+
 # Staticfiles
 # ------------------------------------------------------------------------------
 # Disable Django's static file handling and allow WhiteNoise to take over. This
@@ -87,3 +93,4 @@ DEBUG_TOOLBAR_CONFIG = {
 
 # This will expose all browsable api urls. For dev the default value is true
 API_DEBUG = env.bool('API_DEBUG', default=True)
+
